@@ -1,0 +1,26 @@
+[package]
+name       	= "rust_wasm_vite_dummy"
+version    	= "0.1.0"
+description	= "Rust → WASM via Vite (dummy repo)"
+authors    	= ["x"]
+categories 	= ["wasm"]
+readme     	= "ReadMe.md"
+license    	= "MIT"
+edition    	= "2021"
+
+[lib]
+crate-type = ["cdylib"]
+
+[workspace]
+
+[dependencies]
+wasm-bindgen	= "0.2.81"
+
+[profile.release]
+panic        	= 'abort'	# Do not perform backtrace for panic on release builds
+codegen-units	= 1      	# Perform optimizations on all codegen units
+opt-level    	= 'z'    	# Optimize for size 's' or 'z' "aggressively", 3 fast
+lto          	= true   	# Enable link time optimization
+
+[package.metadata.wasm-pack.profile.release]
+wasm-opt = ["-Oz"]  # O4 fast, Oz/Os small
