@@ -1,0 +1,16 @@
+{
+  "private": true,
+  "author": "x",
+  "name": "Rust_Wasm_Vite_Dummy",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "vite build --mode 'development' & vite",
+    "build": "vite build"
+  },
+  "devDependencies": {
+    "@wasm-tool/rollup-plugin-rust": "^2.2.2",
+    "binaryen": "^106.0.0",
+    "vite": "v3.0.0-beta.9"
+  },
+  "packageManager": "yarn@3.2.1"
+}
