@@ -1,0 +1,30 @@
+{
+  "manifest_version": 3,
+  "name": "Rust_Wasm_Vite_Dummy",
+  "version": "0.0.1",
+  "description": "[description]",
+  "action": {
+    "default_icon": "./assets/icon-512.png",
+    "default_popup": "./popup/index.html"
+  },
+  "options_ui": {
+    "page": "./options/index.html",
+    "open_in_tab": true
+  },
+  "icons": {
+    "16": "./assets/icon-512.png",
+    "48": "./assets/icon-512.png",
+    "128": "./assets/icon-512.png"
+  },
+  "permissions": [
+    "tabs",
+    "storage",
+    "activeTab"
+  ],
+  "host_permissions": [
+    "*://*/*"
+  ],
+  "content_security_policy": {
+    "extension_pages": "script-src 'self' 'wasm-unsafe-eval'; object-src 'self'"
+  }
+}
