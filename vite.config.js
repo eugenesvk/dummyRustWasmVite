@@ -45,9 +45,9 @@ export default defineConfig(({ command, mode }) => {
         options       	: r('src/options/Cargo.toml'),
       }               	,
       output          	: {
-        dir           	: r('dist/js'),
+        dir           	: r('dist'),
         format        	: 'es',
-        entryFileNames	: `[name].js`,
+        entryFileNames	: `js/[name].js`,
       }               	,
     }                 	,
     target            	: 'esnext',
