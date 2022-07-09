@@ -54,6 +54,8 @@ export default defineConfig(({ command, mode }) => {
   },
   plugins: [
     ...sharedConfig.plugins,
+    copyAndWatch(r('src/options/index.html')	, 'options/index.html'),
+    copyAndWatch(r('src/popup/index.html')  	, 'popup/index.html'),
   ],
 }})
 
