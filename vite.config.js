@@ -12,10 +12,9 @@ export const sharedConfig = {
   },
   plugins:[
     rust({
-      serverPath   	: 'dist/js/',
-      // importHook	: function (path)	{ // for browser extensions since their files are put into a separate URL namespace, so need chrome.runtime.getURL to get the correct URL
-      //   return  	  'browser.runtime.getURL(' + JSON.stringify(path) + ')';
-      // }         	,
+      importHook	: function (path)	{ // browser ext' files are in a separate URL namespace
+        return  	  'browser.runtime.getURL(' + JSON.stringify(path) + ')';
+      }         	,
     }),
   ],
   optimizeDeps	: {
@@ -40,7 +39,9 @@ export default defineConfig(({ command, mode }) => {
     sourcemap         	: isDev ? 'inline' : false,
     rollupOptions     	: {
       input           	: {
-        index         	: 'Cargo.toml',
+        background    	: r('src/background/Cargo.toml'),
+        popup         	: r('src/popup/Cargo.toml'),
+        options       	: r('src/options/Cargo.toml'),
       }               	,
       output          	: {
         dir           	: r('dist/js'),
