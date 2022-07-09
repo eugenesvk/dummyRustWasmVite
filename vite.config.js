@@ -1,6 +1,7 @@
 import { defineConfig }	from 'vite'
 import rust            	from '@wasm-tool/rollup-plugin-rust';
 import { resolve }     	from 'path';
+import fs              	from 'fs';
 
 const r   	= (...args) => resolve(__dirname, ...args);
 const port	= 5176;
@@ -55,3 +56,14 @@ export default defineConfig(({ command, mode }) => {
     ...sharedConfig.plugins,
   ],
 }})
+
+function copyAndWatch(fileIn, fileOut) { return {
+  name: 'copy-and-watch',
+  async buildStart() { this.addWatchFile(fileIn); },
+  async generateBundle() {
+    this.emitFile({
+      type    	: 'asset',
+      fileName	: fileOut,
+      source  	: fs.readFileSync(fileIn)
+    }); }
+} }
