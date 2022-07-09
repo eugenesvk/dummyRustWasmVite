@@ -14,11 +14,48 @@ crate-type = ["cdylib"]
 [workspace]
 
 [dependencies]
-wasm-bindgen            	= "0.2.81"
-console_error_panic_hook	= "0.1.7"
-dominator               	= "0.5.27"
-futures-signals         	= "0.3.28"
-once_cell               	= "1.13.0"
+# wasm-bindgen          	= "0.2.81"	# wasm «» JS
+wasm-bindgen            	= {version	= "0.2.82", features = ["serde-serialize"] }
+js-sys                  	= "0.3.58"	# [wasm-bindgen] bindings to JS global APIs
+web-extensions-sys      	= "0.2.0" 	# [wasm-bindgen] bindings to JS APIs for WebExtensions
+wasm-bindgen-futures    	= "0.4.31"	# [wasm-bindgen] Rust Future «» JS Promise
+serde-wasm-bindgen      	= "0.4.3" 	# [wasm-bindgen] alternative native integration of Serde
+serde                   	= {version	="1.0.40",features=["derive"] }
+dominator               	= "0.5.28"	# DOM lib (declarative + FRP signals)
+console_error_panic_hook	= "0.1.7" 	# wasm panic message → console.error
+futures-signals         	= "0.3.30"	#
+futures                 	= {version	="0.3.21", features=["async-await"] }
+once_cell               	= "1.13.0"	#
+# gloo-events           	= "0.1.2" 	# web-sys event listeners → EventListener type (easier)
+gloo-timers             	= {version	="0.2.4",features=["futures"]}
+gloo-utils              	= "0.1.4" 	# wraps common web_sys features with a cleaner API
+either                  	= "1.7"   	# enum Either with variants Left/Right
+
+typed-builder	= "0.10.0"	# compile-time verified builder
+
+# uuid       	= {version="1.1.1", features=["serde","v4","js"] }
+# serde_json 	= "1.0.40"
+# lazy_static	= "1.0.0"
+
+[dependencies.web-sys]
+version = "0.3.58"
+features = [
+  # "Blob",
+  # "BlobPropertyBag",
+  "console",
+  # "EventTarget",
+  # "DomException",
+  # "File",
+  # "FileList",
+  # "FileReader",
+  # "MediaQueryList",
+  # "MediaQueryListEvent",
+  # "Storage",
+  # "Performance",
+  # "Url",
+  # "Window",
+]
+
 
 [profile.release]
 panic        	= 'abort'	# Do not perform backtrace for panic on release builds
