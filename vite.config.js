@@ -27,6 +27,7 @@ export const sharedConfig = {
 
 export default defineConfig(({ command, mode }) => {
   const isDev = mode==='development';
+  const assetDir = 'js/wasm'; // ['assets']
   return {
   ...sharedConfig,
   base  	: command === 'serve' ? `http://localhost:${port}/` : '/dist/',
@@ -35,7 +36,6 @@ export default defineConfig(({ command, mode }) => {
     watch             	: isDev ? {buildDelay:500, include:'src/**'} : undefined,
     outDir            	: r('dist'),
     emptyOutDir       	: false,
-    assetsDir         	: 'wasm', // ['assets']
     minify            	: isDev ?  false   : true,
     sourcemap         	: isDev ? 'inline' : false,
     rollupOptions     	: {
@@ -48,6 +48,7 @@ export default defineConfig(({ command, mode }) => {
         dir           	: r('dist'),
         format        	: 'es',
         entryFileNames	: `js/[name].js`,
+        assetFileNames	: `${assetDir}/[name]`+(isDev?'.[hash]':'')+'[extname]' ,
       }               	,
     }                 	,
     target            	: 'esnext',
