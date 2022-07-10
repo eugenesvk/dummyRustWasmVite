@@ -4,6 +4,7 @@ import { resolve }     	from 'path';
 import fs              	from 'fs';
 
 const r   	= (...args) => resolve(__dirname, ...args);
+const rr  	= (...args) => require.resolve(...args);
 const port	= 5176;
 
 export const sharedConfig = {
@@ -28,6 +29,9 @@ export const sharedConfig = {
 export default defineConfig(({ command, mode }) => {
   const isDev = mode==='development';
   const assetDir = 'js/wasm'; // ['assets']
+  const pf = { dist 	: 'webextension-polyfill/dist/',
+               fMin 	: 'browser-polyfill.min.js',
+               fMMap	: 'browser-polyfill.min.js.map' }
   return {
   ...sharedConfig,
   base  	: command === 'serve' ? `http://localhost:${port}/` : '/dist/',
@@ -57,6 +61,8 @@ export default defineConfig(({ command, mode }) => {
     ...sharedConfig.plugins,
     copyAndWatch(r('src/options/index.html')	, 'options/index.html'),
     copyAndWatch(r('src/popup/index.html')  	, 'popup/index.html'),
+    copyAndWatch(rr(pf['dist']+pf['fMin'])  	, 'js/'+pf['fMin']),
+    copyAndWatch(rr(pf['dist']+pf['fMMap']) 	, 'js/'+pf['fMMap']),
   ],
 }})
 
