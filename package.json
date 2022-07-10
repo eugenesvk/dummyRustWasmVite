@@ -10,7 +10,8 @@
   "devDependencies": {
     "@wasm-tool/rollup-plugin-rust": "^2.2.2",
     "binaryen": "^106.0.0",
-    "vite": "v3.0.0-beta.9"
+    "vite": "v3.0.0-beta.9",
+    "webextension-polyfill": "^0.9.0"
   },
   "packageManager": "yarn@3.2.1"
 }
