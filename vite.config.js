@@ -42,8 +42,8 @@ export default defineConfig(({ command, mode }) => {
     watch             	: isDev ? {buildDelay:500, include:'src/**'} : undefined,
     outDir            	: r('dist'),
     emptyOutDir       	: false,
-    minify            	: isDev ?  false   : true,
-    sourcemap         	: isDev ? 'inline' : false,
+    minify            	: isDev ? false : true,
+    sourcemap         	: isDev ? true  : false,
     rollupOptions     	: {
       input           	: {
         background    	: r('src/background/Cargo.toml'),
