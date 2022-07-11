@@ -10,7 +10,7 @@ const rr  	= (...args) => require.resolve(...args);
 const port	= 5176;
 
 export const sharedConfig = {
-  // root     	: r('src'),
+  root        	: r('src'),
   resolve     	: {
     conditions	: ['development', 'browser'],
   },
