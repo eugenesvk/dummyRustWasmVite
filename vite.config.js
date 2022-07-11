@@ -11,6 +11,7 @@ const port	= 5176;
 
 export const sharedConfig = {
   root        	: r('src'),
+  publicDir   	: r('static'),
   resolve     	: {
     conditions	: ['development', 'browser'],
   },
