@@ -71,6 +71,16 @@ export default defineConfig(({ command, mode }) => {
   ],
 }})
 
+function assetSort(name) {
+  let i   = name.lastIndexOf('.');
+  let ext = name.substring(i+1);
+  switch (ext) {
+    case 'wasm'	: return  `wasm/[name][extname]`; break;
+    case 'css' 	: return   `css/[name][extname]`; break;
+    default    	: return `asset/[name][extname]`;
+  }
+}
+
 function copyAndWatch(fileIn, fileOut) { return {
   name: 'copy-and-watch',
   async buildStart() { this.addWatchFile(fileIn); },
