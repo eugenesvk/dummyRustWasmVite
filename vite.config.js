@@ -30,7 +30,6 @@ export const sharedConfig = {
 
 export default defineConfig(({ command, mode }) => {
   const isDev = mode==='development';
-  const assetDir = 'js/wasm'; // ['assets']
   const pf = { dist 	: 'webextension-polyfill/dist/',
                fMin 	: 'browser-polyfill.min.js',
                fMMap	: 'browser-polyfill.min.js.map' }
@@ -56,7 +55,7 @@ export default defineConfig(({ command, mode }) => {
         dir           	: r('dist'),
         format        	: 'es',
         entryFileNames	: `js/[name].js`,
-        assetFileNames	: `${assetDir}/[name]`+(isDev?'.[hash]':'')+'[extname]' ,
+        assetFileNames	:  ((AssetInfo) => assetSort(AssetInfo.name)) ,
       }               	,
     }                 	,
     target            	: 'esnext',
