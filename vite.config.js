@@ -2,6 +2,8 @@ import { defineConfig }	from 'vite'
 import rust            	from '@wasm-tool/rollup-plugin-rust';
 import { resolve }     	from 'path';
 import fs              	from 'fs';
+import WindiCSS        	from 'vite-plugin-windicss'
+import windiConfig     	from './windi.config'
 
 const r   	= (...args) => resolve(__dirname, ...args);
 const rr  	= (...args) => require.resolve(...args);
@@ -47,6 +49,8 @@ export default defineConfig(({ command, mode }) => {
         background    	: r('src/background/Cargo.toml'),
         popup         	: r('src/popup/Cargo.toml'),
         options       	: r('src/options/Cargo.toml'),
+        popup_windi   	: r('src/popup/popup_windi.html'),
+        options_windi 	: r('src/options/options_windi.html'),
       }               	,
       output          	: {
         dir           	: r('dist'),
@@ -59,6 +63,7 @@ export default defineConfig(({ command, mode }) => {
   },
   plugins: [
     ...sharedConfig.plugins,
+    WindiCSS({config:windiConfig}),
     copyAndWatch(r('src/options/index.html')	, 'options/index.html'),
     copyAndWatch(r('src/popup/index.html')  	, 'popup/index.html'),
     copyAndWatch(rr(pf['dist']+pf['fMin'])  	, 'js/'+pf['fMin']),
