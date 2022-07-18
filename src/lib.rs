@@ -7,6 +7,9 @@ use web_sys::              	console;
 pub mod style;
 pub mod components {
   pub mod logo;
+  pub mod __tests__ {
+    pub mod logo_test;
+  }
 }
 
 /// print to console.log, but only during debug builds: `[file:line]  log message`
