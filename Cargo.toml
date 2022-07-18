@@ -63,6 +63,8 @@ features = [
   # "Window",
 ]
 
+[dev-dependencies]
+wasm-bindgen-test	= "0.3.31"	# test Rust→wasm using wasm-bindgen via `cargo test --target wasm32-unknown-unknown --lib rust_wasm_vite_dummy` (for the lib) or `-p storage_web_ext` (for a given member crate)
 
 [profile.release]
 panic        	= 'abort'	# Do not perform backtrace for panic on release builds
