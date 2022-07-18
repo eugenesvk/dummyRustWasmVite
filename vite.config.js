@@ -22,11 +22,6 @@ export const sharedConfig = {
       }         	,
     }),
   ],
-  optimizeDeps	: {
-    include   	: [
-    ],
-    exclude	: [],
-  },
 }
 
 export default defineConfig(({ command, mode }) => {
@@ -46,9 +41,9 @@ export default defineConfig(({ command, mode }) => {
     sourcemap         	: isDev ? true  : false,
     rollupOptions     	: {
       input           	: {
-        background    	: r('src/background/Cargo.toml'),
+        // background 	: r('src/background/Cargo.toml'),
         popup         	: r('src/popup/Cargo.toml'),
-        options       	: r('src/options/Cargo.toml'),
+        // options    	: r('src/options/Cargo.toml'),
         popup_windi   	: r('src/popup/popup_windi.html'),
         options_windi 	: r('src/options/options_windi.html'),
       }               	,
@@ -64,10 +59,11 @@ export default defineConfig(({ command, mode }) => {
   plugins: [
     ...sharedConfig.plugins,
     WindiCSS({config:windiConfig}),
-    copyAndWatch(r('src/options/index.html')	, 'options/index.html'),
-    copyAndWatch(r('src/popup/index.html')  	, 'popup/index.html'),
-    copyAndWatch(rr(pf['dist']+pf['fMin'])  	, 'js/'+pf['fMin']),
-    copyAndWatch(rr(pf['dist']+pf['fMMap']) 	, 'js/'+pf['fMMap']),
+    // copyAndWatch(r('src/options/index.html')	, 'options/index.html'),
+    copyAndWatch(r('src/popup/index.html')     	, 'popup/index.html'),
+    // copyAndWatch(rr(pf['dist']+pf['fMin'])  	, 'js/'+pf['fMin']),
+    // copyAndWatch(rr(pf['dist']+pf['fMMap']) 	, 'js/'+pf['fMMap']),
+    // copyAndWatch(r('manifest.json')         	, 'manifest.json'),
   ],
 }})
 
