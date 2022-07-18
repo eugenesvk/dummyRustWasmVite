@@ -5,6 +5,9 @@ use wasm_bindgen::prelude::	*;
 use web_sys::              	console;
 
 pub mod style;
+pub mod components {
+  pub mod logo;
+}
 
 /// print to console.log, but only during debug builds: `[file:line]  log message`
 #[macro_export] macro_rules! dbglog { ($($args:tt)*) => {
