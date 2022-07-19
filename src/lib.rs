@@ -11,6 +11,9 @@ pub mod components {
     pub mod logo_test;
   }
 }
+mod composables {
+  pub(crate) mod use_storage_local;
+}
 
 /// print to console.log, but only during debug builds: `[file:line]  log message`
 #[macro_export] macro_rules! dbglog { ($($args:tt)*) => {
