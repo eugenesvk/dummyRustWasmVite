@@ -10,8 +10,11 @@ use std::sync::              	Arc;
 use once_cell::sync::        	Lazy;
 use futures_signals::signal::	{Mutable, SignalExt};
 use dominator::              	{Dom, class, html, clone, events, svg};
-use rust_wasm_vite_dummy::   	{style::*, components::logo::logo};
-use crate::                  	{open_options_page};
+use wasm_bindgen::           	{JsValue as JsVal};
+
+use crate::               	open_options_page;
+use rust_wasm_vite_dummy::	{style::*, components::logo::logo, logic::storage::storage_logic, util::str_slice2js_array};
+use storage_web_ext::     	{LocalStorage, Storage};
 
 
 pub struct App { counter:Mutable<i32>, }
@@ -41,7 +44,10 @@ impl App {
       .style("background-color"	, "red")
       .style("margin"          	, "5px") });
 
-
+    // remove test
+      struct GetDefVals<'a> { field1:&'a str}
+      let ccc = storage_logic();
+    //
     html!("main", { // Create the DOM nodes
       // .attr("id", "app") // it's already mounted on an element with id("app")
       .class(*CLASS_ROOT) // .class(&*CLA_CSS_ROOT)
@@ -62,6 +68,7 @@ impl App {
           .class(["mt-2"])
           .child(html!("span", {
               .text("Storage: ")
+              .text(&ccc.to_string())
               .class(["opacity-50"])
             } ))
     // TODO: replace with key_value() from storage
