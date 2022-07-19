@@ -8,10 +8,17 @@ readme     	= "ReadMe.md"
 license    	= "MIT"
 edition    	= "2021"
 
-[lib]
-crate-type = ["cdylib"]
-
 [workspace]
+members = [ # share common dep resolution (Cargo.lock), output dir, various settings such as profiles
+  "src/background",
+  "src/options",
+  "src/popup",
+]
+default-members = [ # cargo build all members without having to pass --workspace
+  "src/background",
+  "src/options",
+  "src/popup",
+]
 
 [dependencies]
 # wasm-bindgen          	= "0.2.81"	# wasm «» JS
