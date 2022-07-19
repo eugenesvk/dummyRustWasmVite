@@ -11,6 +11,9 @@ pub mod components {
     pub mod logo_test;
   }
 }
+pub mod logic {
+  pub mod storage;
+}
 mod composables {
   pub(crate) mod use_storage_local;
 }
