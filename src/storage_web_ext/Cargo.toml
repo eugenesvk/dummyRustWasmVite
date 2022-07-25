@@ -1,13 +1,13 @@
 [package]
-name = "gloo-storage"
-description = "Convenience crate for working with local and session storage in browser"
-version = "0.2.1"
+name = "gloo-storage-web-ext"
+description = "Convenience crate for working with storage areas (local, but not session/managed/sync) in browser"
+version = "0.0.1"
 authors = ["Rust and WebAssembly Working Group"]
-edition = "2018"
+edition = "2021"
 license = "MIT OR Apache-2.0"
 readme = "README.md"
-repository = "https://github.com/rustwasm/gloo/tree/master/crates/storage"
-homepage = "https://github.com/rustwasm/gloo"
+# repository = "https://github.com/rustwasm/gloo/tree/master/crates/storage"
+# homepage = "https://github.com/rustwasm/gloo"
 categories = ["api-bindings", "storage", "wasm"]
 
 [dependencies]
