@@ -13,11 +13,13 @@ members = [ # share common dep resolution (Cargo.lock), output dir, various sett
   "src/background",
   "src/options",
   "src/popup",
+  "src/storage_web_ext",
 ]
 default-members = [ # cargo build all members without having to pass --workspace
   "src/background",
   "src/options",
   "src/popup",
+  "src/storage_web_ext",
 ]
 
 [dependencies]
