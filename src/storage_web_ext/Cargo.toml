@@ -1,5 +1,5 @@
 [package]
-name       	= "gloo-storage-web-ext"
+name       	= "storage_web_ext"
 description	= "Convenience crate for working with storage areas (local, but not session/managed/sync) in browser"
 version    	= "0.0.1"
 authors    	= ["Rust and WebAssembly Working Group"]
