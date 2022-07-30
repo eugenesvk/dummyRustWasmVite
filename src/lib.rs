@@ -5,6 +5,7 @@ use wasm_bindgen::prelude::	*;
 use web_sys::              	console;
 
 pub mod style;
+pub mod util;
 pub mod components {
   pub mod logo;
   pub mod __tests__ {
