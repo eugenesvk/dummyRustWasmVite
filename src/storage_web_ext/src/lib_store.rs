@@ -1,3 +1,4 @@
+#![cfg_attr(debug_assertions, allow(dead_code, unused_imports, unused_variables))]
 //! This crate provides wrappers for the
 //! [Web Storage API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API)
 //!
