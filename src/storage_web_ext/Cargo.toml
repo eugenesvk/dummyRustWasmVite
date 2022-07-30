@@ -10,6 +10,9 @@ readme     	= "README.md"
 #homepage  	= "https://github.com/rustwasm/gloo"
 categories 	= ["api-bindings", "storage", "wasm"]
 
+[lib]
+path	= "src/lib_store.rs"
+
 [dependencies]
 wasm-bindgen      	= { version = "0.2", features = ["serde-serialize"] }
 serde             	= "1.0"
