@@ -27,3 +27,27 @@ impl               	AsStrSlice for   &[&str]  	{fn as_slice(&self) -> &[&str] { 
 impl<const N:usize>	AsStrSlice for    [&str;N]	{fn as_slice(&self) -> &[&str] {         self }}
 impl               	AsStrSlice for Vec<&str>  	{fn as_slice(&self) -> &[&str] {         self }}
 
+
+// https://stackoverflow.com/questions/54378172/rust-function-that-accepts-either-hashmap-and-btreemap
+use core::            	{borrow::Borrow, hash::Hash};
+use std::collections::	{BTreeMap, HashMap};
+
+pub trait GenericMap<K,V> {
+  fn contains_key<Q>(&    self, k:&Q    ) -> bool where Q:Hash+Eq+Ord, K:Borrow<Q>;
+  fn each_mut    <F>(&mut self,     cb:F)         where F:FnMut((&K, &mut V));
+  fn insert         (&mut self, k:K, v:V) -> Option<V>;
+}
+impl<K,V> GenericMap<K,V> for HashMap<K,V>        where K:Hash+Eq {
+  fn contains_key<Q>(&    self, k:&Q    ) -> bool where Q:Hash+Eq+Ord, K:Borrow<Q>, {
+    self.contains_key(k)}
+  fn each_mut    <F>(&mut self, mut cb:F)         where F:FnMut((&K, &mut V)), {
+    self.iter_mut().for_each(|x| cb(x)) }
+  fn insert         (&mut self, k:K, v:V) -> Option<V> {self.insert(k,v)}
+}
+impl<K,V> GenericMap<K,V> for BTreeMap<K,V>       where K:        Ord {
+  fn contains_key<Q>(&    self, k:&Q    ) -> bool where Q:Hash+Eq+Ord, K:Borrow<Q>, {
+    self.contains_key(k)}
+  fn each_mut    <F>(&mut self, mut cb:F)         where F:FnMut((&K, &mut V)), {
+    self.iter_mut().for_each(|x| cb(x)) }
+  fn insert         (&mut self, k:K, v:V) -> Option<V> {self.insert(k,v)}
+}
