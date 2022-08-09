@@ -14,8 +14,15 @@ use wasm_bindgen::           	{JsValue as JsVal};
 
 use crate::               	open_options_page;
 use rust_wasm_vite_dummy::	{style::*, components::logo::logo, logic::storage::storage_logic, util::str_slice2js_array};
-use storage_web_ext::     	{LocalStorage, Storage};
+use storage_web_ext::     	{LocalStorage, SessionStorage, Storage};
 
+
+use wasm_bindgen_futures::	spawn_local;
+use storage_web_ext::errors::StorageError;
+use wasm_bindgen::UnwrapThrowExt;
+use rust_wasm_vite_dummy::	{log, dbglog};
+use serde_json::          	{Map, Value};
+use std::collections::    	HashMap;
 
 pub struct App { counter:Mutable<i32>, }
 
@@ -47,6 +54,42 @@ impl App {
     // remove test
       struct GetDefVals<'a> { field1:&'a str}
       let ccc = storage_logic();
+
+    let set = spawn_local(async {
+      let key  	= "loc_keys";
+      let value	= "loc_value";
+      let res  	= LocalStorage::set1(key, value).await;
+      dbglog!("@popup @ render: set1_loc   ={:?}", res   ); //
+
+      let obtained_value:Map<String,Value> = LocalStorage::get(key)
+        .await
+        .expect_throw("unreachable: test does not throw an exception");
+      dbglog!("@popup @ render: obtained_value   ={:?}", obtained_value   ); //
+      let obtained_value:&Value = &obtained_value[key];
+      if let Value::String(n) = obtained_value {
+        let obtained_value:String = n.to_string();
+        dbglog!("@popup @ render: obtained_value   ={:?}", obtained_value   ); //
+        assert_eq!(value, obtained_value);
+      }
+
+      let s_key  	= "sess_keys";
+      let s_value	= "sess_value";
+      let s_res  	= SessionStorage::set1(s_key, s_value).await;
+      dbglog!("@popup @ render: set1_ses   ={:?}", s_res   ); //
+
+      let obtained_ses_value:Map<String,Value> = SessionStorage::get(s_key)
+        .await
+        .expect_throw("unreachable: test does not throw an exception");
+      dbglog!("@popup @ render: obtained_value   ={:?}", obtained_ses_value   ); //
+      let obtained_ses_value:&Value = &obtained_ses_value[s_key];
+      if let Value::String(n) = obtained_ses_value {
+        let obtained_ses_value:String = n.to_string();
+        dbglog!("@popup @ render: obtained_value   ={:?}", obtained_ses_value   ); //
+        assert_eq!(s_value, obtained_ses_value);
+      }
+
+      ()
+    });
     //
     html!("main", { // Create the DOM nodes
       // .attr("id", "app") // it's already mounted on an element with id("app")
