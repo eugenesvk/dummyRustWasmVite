@@ -12,7 +12,8 @@ path      	= "src/lib_pop.rs"
 [dependencies]
 wasm-bindgen            	= "0.2.82"	# wasm «» JS
 js-sys                  	= "0.3.58"	# [wasm-bindgen] bindings to JS global APIs
-web-extensions-sys      	= "0.2.0" 	# [wasm-bindgen] bindings to JS APIs for WebExtensions
+# web-extensions-sys    	= "0.2.0" 	# [wasm-bindgen] bindings to JS APIs for WebExtensions
+web-extensions-sys      	= {path   	= "../patch/web-extensions-sys"}
 wasm-bindgen-futures    	= "0.4.31"	# Rust Future «» JS Promise
 dominator               	= "0.5.28"	# DOM lib (declarative + FRP signals)
 console_error_panic_hook	= "0.1.7" 	# wasm panic message → console.error
