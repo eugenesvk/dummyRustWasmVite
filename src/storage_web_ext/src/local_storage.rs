@@ -7,7 +7,7 @@ use crate::Storage;
 pub struct LocalStorage;
 
 impl Storage for LocalStorage {
-  fn raw() -> web_extensions_sys::StorageCommon {
+  fn raw() -> web_extensions_sys::StorageArea {
     web_extensions_sys::browser
       .storage()
       .local()
