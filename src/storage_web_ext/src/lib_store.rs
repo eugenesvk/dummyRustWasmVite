@@ -55,8 +55,9 @@ pub type JsRes     = std::result::Result<JsVal,JsVal>;
 #[async_trait(?Send)]
 pub trait Storage { //! Trait which provides implementations for managing storage in the browser
   /// Get the raw [`web_extensions_sys::Local`] (Storage) instance
-        fn raw         (      ) -> web_extensions_sys::StorageCommon;
+        fn raw         (      ) -> web_extensions_sys::StorageArea;
 
+  // ToDO: get_with_def that receives a key-value object with default values
   async fn get    <K,R>(keys:K) -> Result<R > where R:for<'de>Deserialize<'de>,
   K:AsStrSlice + 'static, { //! Get the value(s) for the specified key(s)
     // TODO: if it's always returning a Map anyway, make R a concrete type instead of a generic?
@@ -104,7 +105,7 @@ pub trait Storage { //! Trait which provides implementations for managing storag
     // no `Map` trait, so can't accept both HashMap and BTreeMap https://stackoverflow.com/questions/54378172/rust-function-that-accepts-either-hashmap-and-btreemap
     // alt1: accept collections for keys/values?
     // alt2: add serde Map to GenericMap?
-    // ToDo: a more efficient wayto create JsObj? like str_slice2js_array?)
+    // ToDo: a more efficient way to create JsObj? like str_slice2js_array?)
     let map_js = JsValue::from_serde(&map).unwrap_throw();
       // fn from_serde<T>(t:&T) -> Result<JsValue> where T:Serialize + ?Sized,
       // Creates a new JsValue from the JSON serialization of the object t provided. This function will serialize the provided value t to a JSON string, send the JSON string to JS, parse it into a JS object, and then return a handle to the JS object. This is unlikely to be super speedy so it’s not recommended for large payloads, but it’s a nice to have in some situations! Requires 'serde-serialize' feature
@@ -151,12 +152,13 @@ pub trait Storage { //! Trait which provides implementations for managing storag
         "unreachable: clear does not throw an exception");
   }
 
-  // getBytesInUse() doesn't exist in storage.local
+  // ToDO: add this
+  // getBytesInUse() doesn't exist in storage.local, but it's only a FireFox bug
   // async fn size   <K,R>(keys:K) -> Result<i32>,
   // K:AsStrSlice + 'static, { //! Get the bytes of storage space used by the item(s) matching the specified key(s)
     // key           string  or              (←↓spec)
     // keys array of strings or
-      // empty(???) array   → 0                           will be retrieved
+      // empty      array   → 0                           will be retrieved
     // null/undefined value → the entire storage contents will be retrieved (see `size_all`↓)
   // }
 }
