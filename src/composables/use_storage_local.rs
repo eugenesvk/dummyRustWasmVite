@@ -9,11 +9,11 @@ use wasm_bindgen::prelude::	*;
 use wasm_bindgen_futures:: 	{JsFuture, spawn_local};
 
 // use web_extensions_sys::	{StorageAreaWrite, Sync, Local, Managed, Storage, StorageChange};
-use web_extensions_sys::   	{browser, Storage, StorageCommon};
+use web_extensions_sys::   	{browser, Storage, StorageArea};
 use js_sys::               	{Object as JsObj, Map as JsMap, Promise as JsPromise};
 
 
-pub fn my_local_storage() -> StorageCommon {
+pub fn my_local_storage() -> StorageArea {
   browser.storage().local()
 }
 
@@ -202,7 +202,7 @@ pub(crate) async fn use_storage_local_fn()  -> JsValue {
   // });
 
   use wasm_bindgen::                 	JsCast;
-  let locst:StorageCommon            	= my_local_storage();
+  let locst:StorageArea              	= my_local_storage();
   let tt2                            	= locst.set(&js_obj4c);
   let set_res:Result<JsValue,JsValue>	= tt2.await;
   let f = match set_res {
