@@ -272,7 +272,7 @@ dependencies = [
  "rust_wasm_vite_dummy",
  "wasm-bindgen",
  "wasm-bindgen-futures",
- "web-extensions-sys 0.2.0 (registry+https://github.com/rust-lang/crates.io-index)",
+ "web-extensions-sys",
  "web-sys",
 ]
 
@@ -323,7 +323,7 @@ dependencies = [
  "storage_web_ext",
  "wasm-bindgen",
  "wasm-bindgen-futures",
- "web-extensions-sys 0.2.0",
+ "web-extensions-sys",
  "web-sys",
 ]
 
@@ -364,7 +364,7 @@ dependencies = [
  "wasm-bindgen",
  "wasm-bindgen-futures",
  "wasm-bindgen-test",
- "web-extensions-sys 0.2.0",
+ "web-extensions-sys",
  "web-sys",
 ]
 
@@ -445,7 +445,7 @@ dependencies = [
  "wasm-bindgen",
  "wasm-bindgen-futures",
  "wasm-bindgen-test",
- "web-extensions-sys 0.2.0",
+ "web-extensions-sys",
  "web-sys",
 ]
 
@@ -592,17 +592,7 @@ dependencies = [
 [[package]]
 name = "web-extensions-sys"
 version = "0.2.0"
-dependencies = [
- "js-sys",
- "wasm-bindgen",
- "wasm-bindgen-futures",
-]
-
-[[package]]
-name = "web-extensions-sys"
-version = "0.2.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "e15d4396f7eff6461f70e2c07c2b8d934ce26edf739260659f3046ae7a981d37"
+source = "git+https://github.com/web-extensions-rs/web-extensions-sys#60b5740e82ffe9895311d71af4ee00e50fb6aa4d"
 dependencies = [
  "js-sys",
  "wasm-bindgen",
