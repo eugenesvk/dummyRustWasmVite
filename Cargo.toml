@@ -26,8 +26,7 @@ default-members = [ # cargo build all members without having to pass --workspace
 # wasm-bindgen          	= "0.2.81"	# wasm «» JS
 wasm-bindgen            	= {version	= "0.2.82", features = ["serde-serialize"] }
 js-sys                  	= "0.3.58"	# [wasm-bindgen] bindings to JS global APIs
-# web-extensions-sys    	= "0.2.0" 	# [wasm-bindgen] bindings to JS APIs for WebExtensions
-web-extensions-sys      	= {path   	= "./src/patch/web-extensions-sys"}
+web-extensions-sys      	= "0.2.0" 	# [wasm-bindgen] bindings to JS APIs for WebExtensions
 wasm-bindgen-futures    	= "0.4.31"	# [wasm-bindgen] Rust Future «» JS Promise
 serde-wasm-bindgen      	= "0.4.3" 	# [wasm-bindgen] alternative native integration of Serde
 serde                   	= {version	="1.0.40",features=["derive"] }
@@ -65,6 +64,9 @@ features = [
   # "Url",
   # "Window",
 ]
+
+[patch.crates-io]
+web-extensions-sys	= {git="https://github.com/web-extensions-rs/web-extensions-sys"}
 
 [dev-dependencies]
 wasm-bindgen-test	= "0.3.31"	# test Rust→wasm using wasm-bindgen via `cargo test --target wasm32-unknown-unknown --lib rust_wasm_vite_dummy` (for the lib) or `-p storage_web_ext` (for a given member crate)

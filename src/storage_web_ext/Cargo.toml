@@ -16,8 +16,7 @@ path	= "src/lib_store.rs"
 [dependencies]
 wasm-bindgen        	= { version = "0.2", features = ["serde-serialize"] }
 wasm-bindgen-futures	= "0.4.31"	# [wasm-bindgen] Rust Future «» JS Promise
-# web-extensions-sys	= "0.2.0" 	# [wasm-bindgen] bindings to JS APIs for WebExtensions
-web-extensions-sys  	= {path   	= "../patch/web-extensions-sys"}
+web-extensions-sys  	= "0.2.0" 	# [wasm-bindgen] bindings to JS APIs for WebExtensions
 serde               	= "1.0.141"
 serde_json          	= "1.0.82"
 thiserror           	= "1.0.31"
